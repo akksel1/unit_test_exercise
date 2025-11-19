@@ -3,7 +3,7 @@ from flask import Flask, redirect, render_template, request, url_for
 app = Flask(__name__)
 
 def increment_number(number):
-    return number - 1
+    return number + 1
 # In-memory database
 items = []
 
