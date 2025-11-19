@@ -1,30 +1,27 @@
 name: CI Checks
 on:
-  pull_request: # ➡️ Déclenchement sur chaque Pull Request
-    branches: [dev] # ➡️ Ciblées sur la branche dev
+  pull_request:
+    branches: [dev]
 
 jobs:
   build:
-    runs-on: ubuntu-latest # Utilisation d'un serveur Linux pour l'exécution
-    
-    steps:
-      - name: Checkout code ⬇️
-        uses: actions/checkout@v4 # Étape pour récupérer le code du dépôt
+    runs-on: ubuntu-latest
 
-      - name: Set up Python 3.11 🐍
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python 3.11
         uses: actions/setup-python@v5
         with:
-          # On utilise 3.11 comme cible dans ta configuration ruff [cite: 26]
-          python-version: '3.11' 
+          python-version: "3.11"
 
-      - name: Install dependencies 📦
-        # Installation des dépendances du projet, plus ruff et pytest [cite: 19]
+      - name: Install dependencies
         run: |
           pip install -r requirements.txt
-          pip install ruff pytest 
+          pip install ruff pytest
 
-      - name: Run Ruff Linting 🧹
-        [cite_start]run: ruff check app # La commande de linting [cite: 71]
+      - name: Run Ruff Linting
+        run: ruff check app
 
-      - name: Run Pytest 
-        [cite_start]run: pytest # La commande de test [cite: 72]
+      - name: Run Pytest
+        run: pytest
